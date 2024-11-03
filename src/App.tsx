@@ -5,6 +5,7 @@ import { MyWindow } from "./Components/hooks-replace-render-props";
 import { UseScrollDetector } from "./Components/render-props-scroll";
 import { MainComponent } from "./Components/memoization-chapter-5-useMemo-Usecallback";
 import { AntiPattern, MainAntiPattern2 } from "./Components/antipattern-memoizing-props";
+import { UseReactMemno } from "./Components/react-memo";
 
 function App() {
 
@@ -26,6 +27,9 @@ function App() {
       <AntiPattern />
       <h1>Anti pattern , when needs to memoizing props</h1>
       <MainAntiPattern2 />
+      <h1>Ati pattern, problem when React.memo without hooks to cache</h1>
+      <h2>Ati pattern, when we use React.memo with hooks to cache</h2>
+      <UseReactMemno />
     </div>
   );
 }
