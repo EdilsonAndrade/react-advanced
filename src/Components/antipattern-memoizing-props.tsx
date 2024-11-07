@@ -18,7 +18,7 @@ export const AntiPattern2 = ({onMount}:{onMount:()=>void})=>{
   },[onMount])
 
   return (
-    <></>
+    <h2>This is AntiPattern2</h2>
   )
 } 
 
