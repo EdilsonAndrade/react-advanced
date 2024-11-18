@@ -16,6 +16,7 @@ import {
   MoveStateDownFix,
   MoveStateDownProblem,
 } from "./Components/move-state-down";
+import { ExampleProvider, Layout, MainPageContextSelector } from "./Components/context-selector";
 
 function App() {
   const [state, setState] = useState(false);
@@ -53,11 +54,11 @@ function App() {
           borderRadius: 8,
         }}
       >
-      <h1>Stateful with props</h1>
-      <UseOfStateFullShareWithProps />
-      <h1>Stateful with children with props</h1>
-    
-      <UseOfStateFullShareWithChildrenWithProps />
+        <h1>Stateful with props</h1>
+        <UseOfStateFullShareWithProps />
+        <h1>Stateful with children with props</h1>
+
+        <UseOfStateFullShareWithChildrenWithProps />
       </div>
       <div
         style={{
@@ -67,8 +68,8 @@ function App() {
           borderRadius: 8,
         }}
       >
-      <h1>Stateful Hooks replaces render with props</h1>
-      <MyWindow />
+        <h1>Stateful Hooks replaces render with props</h1>
+        <MyWindow />
       </div>
       <h1>Stateful render props on scrolling </h1>
       <UseScrollDetector />
@@ -81,6 +82,10 @@ function App() {
       <h1>Ati pattern, problem when React.memo without hooks to cache</h1>
       <h2>Ati pattern, when we use React.memo with hooks to cache</h2>
       <UseReactMemno />
+      <Layout>
+        <MainPageContextSelector />
+      </Layout>
+     
     </div>
   );
 }
