@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import "./index.css";
 import {
   UseOfStateFullShareWithChildrenWithProps,
   UseOfStateFullShareWithProps,
@@ -17,6 +18,7 @@ import {
   MoveStateDownProblem,
 } from "./Components/move-state-down";
 import { ExampleProvider, Layout, MainPageContextSelector } from "./Components/context-selector";
+import { FormUseImperativeHandleApi } from "./Components/demo-useImperativeApi";
 
 function App() {
   const [state, setState] = useState(false);
@@ -85,6 +87,7 @@ function App() {
       <Layout>
         <MainPageContextSelector />
       </Layout>
+      <FormUseImperativeHandleApi />
      
     </div>
   );
