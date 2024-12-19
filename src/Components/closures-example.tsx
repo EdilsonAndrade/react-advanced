@@ -1,3 +1,5 @@
+import React, { useCallback, useEffect, useRef } from "react";
+
 let cached:any = {}
 let prevState = "";
 export function doSomething(value:string){
@@ -21,4 +23,28 @@ export function doSomethingCached(value:string){
     return cached.current;
  
   
+}
+
+export const AnyComponent = ({count, onClick}:{count:number, onClick:()=>void})=>{
+  return(
+    <div data-testid="closure" onClick={onClick}>{count}</div>
+  )
+}
+
+const AnyComponentMemoized = React.memo(AnyComponent)
+export const ClosureWithRef = ()=>{
+  const [count, setCount] = React.useState(0)
+  const ref = useRef(()=>{})
+  const onClick = useCallback(()=>{
+    ref?.current?.();
+  },[])
+
+  useEffect(()=>{
+    ref.current = ()=>{
+      setCount(count+1)
+    } 
+  })
+  return (
+    <AnyComponentMemoized  count={count} onClick={onClick}/>
+    )
 }
