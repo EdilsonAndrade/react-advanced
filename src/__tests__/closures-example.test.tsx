@@ -1,6 +1,6 @@
 /* eslint-disable testing-library/prefer-screen-queries */
-import { ClosureWithRef, doSomething, doSomethingCached } from "../Components/closures-example"
-import {fireEvent, render} from "@testing-library/react"
+import { ClosureTryingUsingMemoize, ClosureWithRef, doSomething, doSomethingCached } from "../Components/closures-example"
+import {fireEvent, getByText, queryByText, render} from "@testing-library/react"
 describe("Closures", ()=>{
   test("Stale Closure - when I pass FIRST value and call the function will always return FIRST text", ()=>{
 
@@ -20,13 +20,27 @@ describe("Closures", ()=>{
     expect(third()).toEqual("THIRD");
   })
 
-  test("when I click on button it will increase the value from 0 to 1 and show it",()=>{
+  test("when I click twice on button it will increase the value from 0 to 2 and show it",()=>{
     const {getByTestId, getByText} = render( <ClosureWithRef/>)
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const result = getByTestId("closure")
     fireEvent.click(result)
-    const textResult = getByText("1")
+    fireEvent.click(result)
+    const textResult = getByText("2")
     expect(result).toBeDefined()
-    expect(textResult?.innerHTML).toEqual("1")
+    expect(textResult?.innerHTML).toEqual("2")
+  })
+  
+  test("ClosureTryingUsingMemoize - when I click it will persist value 1 and show that the React.Memo even with useCallBack the click will make the component re-render",()=>{
+    //this function will tes
+    const {getByTestId, queryByText, getByText} = render( <ClosureTryingUsingMemoize/>)
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const result = getByTestId("closure")
+    fireEvent.click(result)
+    fireEvent.click(result)
+    expect(result).toBeDefined()
+    expect(queryByText("2")).not.toBeInTheDocument()
+   
+    expect(getByText("1")).toBeInTheDocument()
   })
 })

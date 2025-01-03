@@ -25,14 +25,14 @@ export function doSomethingCached(value:string){
   
 }
 
-export const AnyComponent = ({count, onClick}:{count:number, onClick:()=>void})=>{
-  return(
+export const AnyComponent = ({count, onClick}:{count:number, onClick:()=>void}): JSX.Element =>{
+  return (
     <div data-testid="closure" onClick={onClick}>{count}</div>
   )
 }
 
 const AnyComponentMemoized = React.memo(AnyComponent)
-export const ClosureWithRef = ()=>{
+export const ClosureWithRef = (): JSX.Element =>{
   const [count, setCount] = React.useState(0)
   const ref = useRef(()=>{})
   const onClick = useCallback(()=>{
@@ -47,4 +47,21 @@ export const ClosureWithRef = ()=>{
   return (
     <AnyComponentMemoized  count={count} onClick={onClick}/>
     )
+}
+
+export const ClosureTryingUsingMemoize = (): JSX.Element => {
+  const [count, setCount] = React.useState(0)
+  const handleClick = useCallback(()=>{
+  
+    //do nothing
+  },[])
+
+  useEffect(()=>{
+    setCount((prev)=>prev+1)
+  },[])
+  return (
+    <>
+      <AnyComponent count={count} onClick={handleClick}/>
+    </>
+  )
 }
